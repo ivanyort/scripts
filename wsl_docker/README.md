@@ -107,3 +107,23 @@ C:
 cd c:\tools
 .\docker
 ```
+
+Não usar comandos abaixo
+
+
+```
+docker login
+docker context create wsl --docker "host=tcp://<YOUR_WSL_IP>:2375"
+docker context use wsl
+
+wsl -- ip -o -4 -json addr list eth0 `
+| ConvertFrom-Json `
+| %{ $_.addr_info.local } `
+| ?{ $_ }
+
+$wslip = wsl -- ip -o -4 -json addr list eth0 | ConvertFrom-Json | %{ $_.addr_info.local } ` | ?{ $_ }
+Write-Host "Setting Docker context 'wsl' to host=tcp://$($wslip):2375"
+docker context update wsl --docker "host=tcp://$($wslip):2375"
+docker context use wsl
+
+```
