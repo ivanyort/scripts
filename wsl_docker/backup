@@ -1,0 +1,41 @@
+Do not use the scripts below
+
+Compilar o docker (client) para windows. Isso é feito dentro do RockyLinux
+```
+cd /root
+git clone https://github.com/docker/cli.git
+cd cli
+docker buildx bake
+docker buildx bake --set binary.platform=windows/amd64
+```
+Se tudo funcionou até aqui, podemos copiar o cliente docker windows para o diretorio c:\tools (este diretorio deve ser incluido no path do windows)
+```
+mkdir -p /mnt/c/tools
+cp build/docker-windows-amd64.exe /mnt/c/tools/docker.exe
+```
+Voltando ao Powershell para erminar a configuração do cliente docker
+```
+C:
+cd c:\tools
+.\docker
+```
+
+Não usar comandos abaixo
+
+
+```
+docker login
+docker context create wsl --docker "host=tcp://<YOUR_WSL_IP>:2375"
+docker context use wsl
+
+wsl -- ip -o -4 -json addr list eth0 `
+| ConvertFrom-Json `
+| %{ $_.addr_info.local } `
+| ?{ $_ }
+
+$wslip = wsl -- ip -o -4 -json addr list eth0 | ConvertFrom-Json | %{ $_.addr_info.local } ` | ?{ $_ }
+Write-Host "Setting Docker context 'wsl' to host=tcp://$($wslip):2375"
+docker context update wsl --docker "host=tcp://$($wslip):2375"
+docker context use wsl
+
+```
