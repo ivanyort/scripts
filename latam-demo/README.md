@@ -30,11 +30,11 @@ docker run --name oracle --restart always --net demo-net -v /media:/media -d --p
 Portainer
 ```
 docker volume create portainer_data
-docker run -d -p 8000:8000 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:latest
+docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:latest
 ```
 Data Gateway
 ```
-docker run -d -p 3552:3552 --name data-gateway --restart always --net demo-net -v /media:/media  -e "TENANT=changetoyourtenant.us.qlikcloud.com" ivanyort/data-gateway
+docker run -d -p 3555:3552 --name data-gateway --restart always --net demo-net -v /media:/media  -e "TENANT=changetoyourtenant.us.qlikcloud.com" ivanyort/data-gateway
 
 Replicate interface available (for cheking purposes) with user root/Qlik123$
 ```
