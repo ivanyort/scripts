@@ -20,8 +20,10 @@ Enable-WindowsOptionalFeature -Online -FeatureName 'Microsoft-Windows-Subsystem-
 
 Vou utilizar RockyLinux ao inves do Ubuntu
 ```
-Invoke-WebRequest -Uri https://dl.rockylinux.org/pub/rocky/8/images/x86_64/Rocky-8-Container-Base.latest.x86_64.tar.xz -OutFile D:\temp\rockylinux.tar.xz
-wsl --import RockyLinux D:\wsl\rockylinux D:\temp\rockylinux.tar.xz
+mkdir c:\temp
+mkdir c:\wsl
+Invoke-WebRequest -Uri https://dl.rockylinux.org/pub/rocky/8/images/x86_64/Rocky-8-Container-Base.latest.x86_64.tar.xz -OutFile C:\temp\rockylinux.tar.xz
+wsl --import RockyLinux C:\wsl\rockylinux C:\temp\rockylinux.tar.xz
 wsl --list
 ```
 
@@ -63,16 +65,10 @@ Instalação do docker no RockyLinux
 dnf config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 dnf -y install docker-ce docker-ce-cli containerd.io
 ```
-Para possibilitar conexões remotas
+Iniciar o serviço Docker
 ```
 systemctl enable docker
 systemctl start docker
-mkdir -p /etc/systemd/system/docker.service.d
-echo '[Service]' > /etc/systemd/system/docker.service.d/options.conf
-echo 'ExecStart=' >> /etc/systemd/system/docker.service.d/options.conf
-echo 'ExecStart=/usr/bin/dockerd -H unix:// -H tcp://0.0.0.0:2375' >> /etc/systemd/system/docker.service.d/options.conf
-systemctl daemon-reload
-systemctl restart docker
 ```
 
 Verificação da instalação do Docker
