@@ -1,12 +1,12 @@
 ```powershell
-Disable-WindowsOptionalFeature -Online -FeatureName 'Containers' -Online
+Disable-WindowsOptionalFeature -Online -FeatureName 'Containers'
 ```
 ```powershell
-Enable-WindowsOptionalFeature -Online -FeatureName 'Microsoft-Hyper-V' -Online
+Disable-WindowsOptionalFeature -Online -FeatureName 'Microsoft-Hyper-V'
 ```
 ```powershell
-Enable-WindowsOptionalFeature -Online -FeatureName 'VirtualMachinePlatform' -Online
+Disable-WindowsOptionalFeature -Online -FeatureName 'VirtualMachinePlatform'
 ```
 ```powershell
-Enable-WindowsOptionalFeature -Online -FeatureName 'Microsoft-Windows-Subsystem-Linux' -Online
+Disable-WindowsOptionalFeature -Online -FeatureName 'Microsoft-Windows-Subsystem-Linux'
 ```
