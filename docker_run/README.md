@@ -17,7 +17,7 @@ docker run --name sqlserver --restart always --net demo-net -p 1433:1433 -e "MSS
 docker run --name postgres --restart always --net demo-net -p 5432:5432 -e "POSTGRES_PASSWORD=Qlik123$" -d ivanyort/postgres-13
 docker run --name mysql --restart always --net demo-net -p 3306:3306 -e MARIADB_ROOT_PASSWORD=Qlik123$ -d ivanyort/mariadb-10
 docker run --name oracle --restart always --net demo-net  -d --privileged -p 1521:1521 ivanyort/oracle-12c
-docker run --name data-gateway --restart always --net demo-net  -d -e "TENANT=yort.us.qlikcloud.com" ivanyort/data-gateway
+docker run --name data-gateway --restart always --net demo-net  -d -p 3553:3552 -e "TENANT=yort.us.qlikcloud.com" ivanyort/data-gateway
 docker run --name demo-apps --restart always --net demo-net  -d -p 80:80 ivanyort/demo-apps
 docker run --name replicate --restart always --net demo-net  -d -p 3552:3552 ivanyort/replicate
 docker run --name kafka --restart always --net demo-net  -d -p 2181:2181 -p 3030:3030 -p 8081-8083:8081-8083 -p 9581-9585:9581-9585 -p 9092:9092 lensesio/fast-data-dev:latest
@@ -25,16 +25,5 @@ docker run --name kafka --restart always --net demo-net  -d -p 2181:2181 -p 3030
 Portainer
 ```
 docker volume create portainer_data
-docker run -d -p 8000:8000 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:latest
-```
-
-Não Utilizar, somente historico
-```
-docker run --detach --name mariadb --env MARIADB_USER=root --env MARIADB_PASSWORD=Qlik123$ --env MARIADB_ROOT_PASSWORD=Qlik123$  mariadb:10.2.6
-docker run --name sap --restart always --net demo-net  -d esjewett/nwabap750
-docker run --name sap --net demo-net  sunpizza/nwabap
-docker run -d --name firebird -p 3050:3050 --restart unless-stopped	 mladenp87/firebird-1.5.6-ss
-docker run -d --name firebird -p 3050:3050 --restart unless-stopped	 ihsahn/firebird-docker
-docker pull ihsahn/firebird-docker
-docker run -d --name interbase -p 3050:3050 --restart unless-stopped  docker pull sybilla/interbase:6.0.1
+docker run -d -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock portainer/portainer-ce:latest
 ```
