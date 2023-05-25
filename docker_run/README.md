@@ -13,7 +13,7 @@ docker run --name oracle --restart always --net demo-net  -d --privileged -p 152
 ```
 Todos
 ```
-docker run --name sqlserver --restart always --net demo-net -p 1433:1433 -e "MSSQL_SA_PASSWORD=Qlik123$" -d ivanyort/sqlserver-2022
+docker run --name sqlserver --restart always --net demo-net -p 1433:1433 -e "MSSQL_SA_PASSWORD=Qlik123$" -d ivanyort/sqlserver-2019
 docker run --name postgres --restart always --net demo-net -p 5432:5432 -e "POSTGRES_PASSWORD=Qlik123$" -d ivanyort/postgres-13
 docker run --name mysql --restart always --net demo-net -p 3306:3306 -e MARIADB_ROOT_PASSWORD=Qlik123$ -d ivanyort/mariadb-10
 docker run --name oracle --restart always --net demo-net  -d --privileged -p 1521:1521 ivanyort/oracle-12c
