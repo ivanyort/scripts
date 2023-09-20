@@ -30,7 +30,6 @@ docker run -d -p 9443:9443 --name portainer --restart=always -v /var/run/docker.
 
 Talend
 ```
-docker volume create portainer_data
 docker run --name remote-engine --restart always --net demo-net -d -e "PREAUTHKEY=XXXXXXXXXXXXXXXX" ivanyort/remote-engine
 ```
 
