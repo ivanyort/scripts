@@ -5,6 +5,9 @@ Habilitar funcionalidades no Windows (Um ou mais reboots serão necessários)
 Powershell (Administrador)
 
 ```powershell
+Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
+```
+```powershell
 Enable-WindowsOptionalFeature -Online -FeatureName 'Containers' -All
 ```
 ```powershell
