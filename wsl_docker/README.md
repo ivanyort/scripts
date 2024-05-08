@@ -63,7 +63,7 @@ echo 'keepcache=True' >> /etc/dnf/dnf.conf
 dnf -y clean all
 dnf -y update && dnf -y upgrade
 dnf -y install 'dnf-command(config-manager)'
-dnf -y install sudo git iproute net-tools procps-ng mlocate cockpit passwd buildah shasum
+dnf -y install sudo git iproute net-tools procps-ng mlocate cockpit passwd buildah perl-Digest-SHA
 ```
 Instalação do docker no RockyLinux
 ```
