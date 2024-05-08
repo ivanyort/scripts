@@ -25,8 +25,8 @@ Vou utilizar RockyLinux ao inves do Ubuntu
 ```
 mkdir c:\temp
 mkdir c:\wsl
-Invoke-WebRequest -Uri https://dl.rockylinux.org/pub/rocky/8/images/x86_64/Rocky-8-Container-Base.latest.x86_64.tar.xz -OutFile C:\temp\rockylinux.tar.xz
-wsl --import RockyLinux C:\wsl\rockylinux C:\temp\rockylinux.tar.xz
+Invoke-WebRequest -Uri https://dl.rockylinux.org/pub/rocky/9/images/x86_64/Rocky-9-Container-Base.latest.x86_64.tar.xz -OutFile C:\temp\rockylinux.tar.xz
+wsl --import rockylinux C:\wsl\rockylinux C:\temp\rockylinux.tar.xz
 wsl --list
 ```
 
