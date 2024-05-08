@@ -41,6 +41,7 @@ Habilitar o systemd
 ```
 echo '[boot]' > /etc/wsl.conf
 echo 'systemd=true' >> /etc/wsl.conf
+dnf -y install systemd
 ```
 Desabilitar o ipv6
 ```
