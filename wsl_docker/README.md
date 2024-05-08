@@ -43,11 +43,6 @@ echo '[boot]' > /etc/wsl.conf
 echo 'systemd=true' >> /etc/wsl.conf
 dnf -y install systemd
 ```
-Desabilitar o ipv6
-```
-echo 'net.ipv6.conf.all.disable_ipv6 = 1' > /etc/sysctl.d/01_dis_ipv6.conf
-echo 'net.ipv6.conf.default.disable_ipv6 = 1' >> /etc/sysctl.d/01_dis_ipv6.conf
-```
 
 Será necessário reiniciar o RockyLinux, para isso saia do terminal e reinicie o RockyLinux
 ```
