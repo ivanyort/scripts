@@ -35,3 +35,7 @@ docker run --name remote-engine --add-host=demo.labsp.com:host-gateway --restart
 docker run --name tdc --add-host=demo.labsp.com:host-gateway --mac-address="12:34:de:b0:6b:61" --restart always --net demo-net -p 11480:11480 -d ivanyort/tdc
 ```
 
+Dockur
+```
+docker run -it --name win1 --add-host=demo.labsp.com:host-gateway --restart always --net demo-net -p 8006:8006 -p 4389:3389 --device=/dev/kvm --cap-add NET_ADMIN --stop-timeout 120 -e "VERSION=2019" -e "RAM_SIZE=16G" -e "CPU_CORES=8" -e "DISK_SIZE=256G" dockurr/windows
+```
