@@ -44,3 +44,9 @@ Correção para o netbeans
 ```
 -J-Dnetbeans.slow.system.clipboard.hack=false -J-DTopSecurityManager.disable=true -J-Dorg.netbeans.NbClipboard.level=FINEST
 ```
+
+Upgrade do data-gateway
+```
+docker exec data-gateway /opt/upgrade.sh
+```
+
