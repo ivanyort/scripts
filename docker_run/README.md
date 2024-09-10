@@ -32,7 +32,7 @@ docker run -d -p 9443:9443 --name portainer --restart=always -v /var/run/docker.
 Talend
 ```
 docker run --name remote-engine --add-host=demo.labsp.com:host-gateway --restart always --net demo-net -d -e "PREAUTHKEY=XXXXXXXXXXXXXXXX" ivanyort/remote-engine
-docker run --name tdc --add-host=demo.labsp.com:host-gateway --mac-address="12:34:de:b0:6b:61" --restart always --net demo-net -p 11480:11480 -d ivanyort/tdc
+docker run --name tdc --add-host=demo.labsp.com:host-gateway --mac-address="12:34:de:b0:6b:61" --restart always --net demo-net -p 11480:11480 -p 4432:4432 -d ivanyort/tdc:8.1-20240909
 ```
 
 Dockur
