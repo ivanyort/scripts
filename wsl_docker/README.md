@@ -55,11 +55,11 @@ Pacotes necessários
 ```
 dnf install -y glibc-all-langpacks langpacks-en
 localectl set-locale LANG=en_US.UTF-8
-sed -i 's@mirrorlist?arch@mirrorlist?cc=br\&arch@g' /etc/yum.repos.d/rocky*repo
-echo 'fastestmirror=True' >> /etc/dnf/dnf.conf
-echo 'max_parallel_downloads=10' >> /etc/dnf/dnf.conf
-echo 'defaultyes=True' >> /etc/dnf/dnf.conf
-echo 'keepcache=True' >> /etc/dnf/dnf.conf
+#sed -i 's@mirrorlist?arch@mirrorlist?cc=br\&arch@g' /etc/yum.repos.d/rocky*repo
+#echo 'fastestmirror=True' >> /etc/dnf/dnf.conf
+#echo 'max_parallel_downloads=10' >> /etc/dnf/dnf.conf
+#echo 'defaultyes=True' >> /etc/dnf/dnf.conf
+#echo 'keepcache=True' >> /etc/dnf/dnf.conf
 dnf -y clean all
 dnf -y update && dnf -y upgrade
 dnf -y install 'dnf-command(config-manager)'
