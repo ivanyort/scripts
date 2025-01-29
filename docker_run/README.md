@@ -31,7 +31,7 @@ docker run -d -p 9443:9443 --name portainer --restart=always -v /var/run/docker.
 
 Talend
 ```
-docker run --name remote-engine --add-host=demo.labsp.com:host-gateway --restart always --net demo-net -p 5070:5070 -d -e "PREAUTHKEY=XXXXXXXXXXXXXXXX" ivanyort/remote-engine
+docker run --name remote-engine --add-host=demo.labsp.com:host-gateway --restart always --net demo-net -p 5070-5079:5070-5079 -d -e "PREAUTHKEY=XXXXXXXXXXXXXXXX" ivanyort/remote-engine
 docker run --name tdc --add-host=demo.labsp.com:host-gateway --mac-address="12:34:de:b0:6b:61" --restart always --net demo-net --volume="$HOME/.Xauthority:/root/.Xauthority:rw" -p 11481:11481 -p 11480:11480 -p 4432:4432 -p 7070:81 -d ivanyort/tdc
 ```
 
