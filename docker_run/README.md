@@ -56,3 +56,14 @@ Enterprise Manager
 ```
 docker run -it --name qem --add-host=demo.labsp.com:host-gateway --restart always --net demo-net -p 8006:8006 -p 4389:3389 -p 8443:8443 -p 8002:8002 --volume ./w25.iso:/boot.iso --device=/dev/kvm --cap-add NET_ADMIN --stop-timeout 120 -e "VERSION=2025" -e "RAM_SIZE=16G" -e "CPU_CORES=8" -e "DISK_SIZE=256G" -e "USERNAME=root" -e "PASSWORD=Qlik123$" dockurr/windows
 ```
+Ajustar o Relógio
+Instalar Google Chrome Canary
+Instalar o 7-zip
+Instalar o QEM
+```
+cd "\Program Files\Attunity\Enterprise Manager\bin"
+aemctl.exe configuration set --address demo.labsp.com
+aemctl.exe configuration set --http_port 8082
+aemctl.exe configuration set --https_port 8443
+```
+
