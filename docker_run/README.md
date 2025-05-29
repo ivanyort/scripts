@@ -24,7 +24,7 @@ docker run --name demo-apps --add-host=demo.labsp.com:host-gateway --restart alw
 docker run --name replicate --add-host=demo.labsp.com:host-gateway --restart always --net demo-net  -d -p 3552:3552 ivanyort/replicate
 docker run --name it-tools --add-host=demo.labsp.com:host-gateway --restart always --net demo-net  -d -p 8080:80 -it corentinth/it-tools
 docker rm -f zookeeper broker schema-registry rest-proxy kafka-ui; export LOCALHOSTNAME=demo.labsp.com; curl https://raw.githubusercontent.com/ivanyort/scripts/refs/heads/main/docker_run/kafka-compose.yml -o kafka-compose.yml; docker compose -f kafka-compose.yml rm -fsv; docker compose -f kafka-compose.yml create; docker compose -f kafka-compose.yml start
-docker run -d --name minio --add-host=demo.labsp.com:host-gateway --restart always -p 9000:9000 -p 9001:9001 -e MINIO_ROOT_USER=qlik -e MINIO_ROOT_PASSWORD=Qlik123$ minio/minio server /data --console-address ":9001"
+docker run -d --name minio --add-host=demo.labsp.com:host-gateway --restart always --net demo-net -p 9000:9000 -p 9001:9001 -e MINIO_ROOT_USER=qlik -e MINIO_ROOT_PASSWORD=Qlik123$ minio/minio server /data --console-address ":9001"
 ```
 Portainer
 ```
