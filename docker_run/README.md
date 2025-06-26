@@ -182,5 +182,48 @@ BEGIN
 END
 $$;
 ```
+Criar tabela com controle de criado em e atualizado em (MariaDB)
+
+```
+-- 1. Cria a tabela orders com AUTO_INCREMENT e timestamps automáticos
+DROP TABLE IF EXISTS orders;
+CREATE TABLE orders (
+  order_id      INT             NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  customer_id   INT             NOT NULL,
+  product_id    INT             NOT NULL,
+  quantity      INT             NOT NULL,
+  total_amount  DECIMAL(10,2)   NOT NULL,
+  status        VARCHAR(20)     NOT NULL DEFAULT 'pending',
+  created_at    DATETIME        NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at    DATETIME        NOT NULL DEFAULT CURRENT_TIMESTAMP
+                  ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB;
+
+INSERT INTO orders (
+  customer_id,
+  product_id,
+  quantity,
+  total_amount,
+  status,
+  created_at,
+  updated_at
+)
+SELECT
+  FLOOR(RAND() * 1000) + 1,                                           -- customer_id entre 1 e 1000
+  FLOOR(RAND() * 100) + 1,                                            -- product_id entre 1 e 100
+  FLOOR(RAND() * 10) + 1,                                             -- quantity entre 1 e 10
+  ROUND(RAND() * 1000 + 20, 2),                                       -- total_amount entre 20.00 e ~1020.00
+  ELT(
+    FLOOR(RAND() * 5) + 1,
+    'pending','processing','shipped','delivered','cancelled'
+  ),                                                                  -- status aleatório
+  DATE_SUB(NOW(), INTERVAL FLOOR(RAND() * 365) DAY),                  -- created_at até 365 dias atrás
+  DATE_SUB(NOW(), INTERVAL FLOOR(RAND() * 365) DAY)                   -- updated_at até 365 dias atrás
+FROM mysql.help_topic AS a
+CROSS JOIN mysql.help_topic AS b
+-- (se precisar de mais linhas, adicione mais um CROSS JOIN c)
+LIMIT 100000;
+```
+
 
 
