@@ -68,3 +68,119 @@ aemctl.exe configuration set --http_port 8083
 aemctl.exe configuration set --https_port 8443
 ```
 
+Criar tabelas de Clientes em massa (postgres)
+```
+DROP TABLE IF EXISTS customers_10k;
+DROP TABLE IF EXISTS customers_100k;
+DROP TABLE IF EXISTS customers_1M;
+DROP TABLE IF EXISTS customers_10M;
+DROP TABLE IF EXISTS customers_100M;
+
+CREATE TABLE customers_10k (
+  id                   BIGSERIAL PRIMARY KEY,
+  name                 TEXT       NOT NULL,
+  email                TEXT       NOT NULL UNIQUE,
+  social_security_num  CHAR(11)   NOT NULL UNIQUE,
+  registration_date    TIMESTAMP  NOT NULL DEFAULT now(),
+  balance              NUMERIC(10,2) NOT NULL DEFAULT 0
+);
+CREATE TABLE customers_100k (
+  id                   BIGSERIAL PRIMARY KEY,
+  name                 TEXT       NOT NULL,
+  email                TEXT       NOT NULL UNIQUE,
+  social_security_num  CHAR(11)   NOT NULL UNIQUE,
+  registration_date    TIMESTAMP  NOT NULL DEFAULT now(),
+  balance              NUMERIC(10,2) NOT NULL DEFAULT 0
+);
+CREATE TABLE customers_1M (
+  id                   BIGSERIAL PRIMARY KEY,
+  name                 TEXT       NOT NULL,
+  email                TEXT       NOT NULL UNIQUE,
+  social_security_num  CHAR(11)   NOT NULL UNIQUE,
+  registration_date    TIMESTAMP  NOT NULL DEFAULT now(),
+  balance              NUMERIC(10,2) NOT NULL DEFAULT 0
+);
+CREATE TABLE customers_10M (
+  id                   BIGSERIAL PRIMARY KEY,
+  name                 TEXT       NOT NULL,
+  email                TEXT       NOT NULL UNIQUE,
+  social_security_num  CHAR(11)   NOT NULL UNIQUE,
+  registration_date    TIMESTAMP  NOT NULL DEFAULT now(),
+  balance              NUMERIC(10,2) NOT NULL DEFAULT 0
+);
+CREATE TABLE customers_100M (
+  id                   BIGSERIAL PRIMARY KEY,
+  name                 TEXT       NOT NULL,
+  email                TEXT       NOT NULL UNIQUE,
+  social_security_num  CHAR(11)   NOT NULL UNIQUE,
+  registration_date    TIMESTAMP  NOT NULL DEFAULT now(),
+  balance              NUMERIC(10,2) NOT NULL DEFAULT 0
+);
+
+INSERT INTO customers_10k (name, email, social_security_num, registration_date, balance)
+SELECT
+  'Customer ' || g                            AS name,
+  'customer' || g || '@example.com'           AS email,
+  lpad((10000000000 + g)::TEXT, 11, '0')      AS social_security_num,
+  now() - (random() * interval '365 days')    AS registration_date,
+  round((random()*10000)::numeric, 2)         AS balance
+FROM generate_series(1, 10000) AS g;
+
+INSERT INTO customers_100k (name, email, social_security_num, registration_date, balance)
+SELECT
+  'Customer ' || g,
+  'customer' || g || '@example.com',
+  lpad((20000000000 + g)::TEXT, 11, '0'),
+  now() - (random() * interval '365 days'),
+  round((random()*10000)::numeric, 2)
+FROM generate_series(1, 100000) AS g;
+
+INSERT INTO customers_1M (name, email, social_security_num, registration_date, balance)
+SELECT
+  'Customer ' || g,
+  'customer' || g || '@example.com',
+  lpad((30000000000 + g)::TEXT, 11, '0'),
+  now() - (random() * interval '365 days'),
+  round((random()*10000)::numeric, 2)
+FROM generate_series(1, 1000000) AS g;
+
+DO $$
+DECLARE
+  batch_size  CONSTANT INT := 1000000;
+  i           INT;
+BEGIN
+  FOR i IN 0 .. 9 LOOP
+    INSERT INTO customers_10m (name, email, social_security_num, registration_date, balance)
+    SELECT
+      'Customer ' || (i * batch_size + g),
+      'customer' || (i * batch_size + g) || '@example.com',
+      lpad((40000000000 + i * batch_size + g)::TEXT, 11, '0'),
+      now() - (random() * interval '365 days'),
+      round((random()*10000)::numeric, 2)
+    FROM generate_series(1, batch_size) AS g;
+    COMMIT;
+  END LOOP;
+END
+$$;
+
+DO $$
+DECLARE
+  batch_size  CONSTANT INT := 1000000;
+  i           INT;
+BEGIN
+  FOR i IN 0 .. 99 LOOP
+    INSERT INTO customers_100m (name, email, social_security_num, registration_date, balance)
+    SELECT
+      'Customer ' || (i * batch_size + g),
+      'customer' || (i * batch_size + g) || '@example.com',
+      lpad((40000000000 + i * batch_size + g)::TEXT, 11, '0'),
+      now() - (random() * interval '365 days'),
+      round((random()*10000)::numeric, 2)
+    FROM generate_series(1, batch_size) AS g;
+    COMMIT;
+  END LOOP;
+END
+$$;
+```
+
+
