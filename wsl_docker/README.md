@@ -6,17 +6,9 @@ Powershell (Administrador)
 
 ```powershell
 Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux -NoRestart
-```
-```powershell
 Enable-WindowsOptionalFeature -Online -FeatureName 'Containers' -All -NoRestart
-```
-```powershell
 Enable-WindowsOptionalFeature -Online -FeatureName 'Microsoft-Hyper-V' -All -NoRestart
-```
-```powershell
 Enable-WindowsOptionalFeature -Online -FeatureName 'VirtualMachinePlatform' -All -NoRestart
-```
-```powershell
 Enable-WindowsOptionalFeature -Online -FeatureName 'Microsoft-Windows-Subsystem-Linux' -All -NoRestart
 ```
 
