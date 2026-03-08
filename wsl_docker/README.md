@@ -5,19 +5,19 @@ Habilitar funcionalidades no Windows (Um ou mais reboots serão necessários)
 Powershell (Administrador)
 
 ```powershell
-Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
+Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux -NoRestart
 ```
 ```powershell
-Enable-WindowsOptionalFeature -Online -FeatureName 'Containers' -All
+Enable-WindowsOptionalFeature -Online -FeatureName 'Containers' -All -NoRestart
 ```
 ```powershell
-Enable-WindowsOptionalFeature -Online -FeatureName 'Microsoft-Hyper-V' -All
+Enable-WindowsOptionalFeature -Online -FeatureName 'Microsoft-Hyper-V' -All -NoRestart
 ```
 ```powershell
-Enable-WindowsOptionalFeature -Online -FeatureName 'VirtualMachinePlatform' -All
+Enable-WindowsOptionalFeature -Online -FeatureName 'VirtualMachinePlatform' -All -NoRestart
 ```
 ```powershell
-Enable-WindowsOptionalFeature -Online -FeatureName 'Microsoft-Windows-Subsystem-Linux' -All
+Enable-WindowsOptionalFeature -Online -FeatureName 'Microsoft-Windows-Subsystem-Linux' -All -NoRestart
 ```
 
 
