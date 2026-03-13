@@ -20,7 +20,7 @@ docker run --name postgres --add-host=demo.labsp.com:host-gateway --restart alwa
 docker run --name mysql --add-host=demo.labsp.com:host-gateway --restart always --net demo-net -p 3306:3306 -e MARIADB_ROOT_PASSWORD=Qlik123$ -d ivanyort/mariadb-10
 docker run --name oracle --add-host=demo.labsp.com:host-gateway --restart always --net demo-net  -d -e ORACLE_PASSWORD=Qlik123$ -p 1521:1521 ivanyort/oracle-21c
 docker run --name data-gateway --add-host=demo.labsp.com:host-gateway --restart always --net demo-net  -d -p 3553:3552 -e "TENANT=yort.us.qlikcloud.com" ivanyort/data-gateway-public
-docker run --name demo-apps --add-host=demo.labsp.com:host-gateway --restart always --net demo-net  -d -p 80:80 ivanyort/demo-apps
+docker run --name demo-apps --add-host=demo.labsp.com:host-gateway --restart always --net demo-net  -d -p 8080:80 ivanyort/demo-apps
 docker run --name replicate --add-host=demo.labsp.com:host-gateway --restart always --net demo-net  -d -p 3552:3552 ivanyort/replicate
 docker run --name it-tools --add-host=demo.labsp.com:host-gateway --restart always --net demo-net  -d -p 8080:80 -it corentinth/it-tools
 docker rm -f zookeeper broker schema-registry rest-proxy kafka-ui; export LOCALHOSTNAME=demo.labsp.com; curl https://raw.githubusercontent.com/ivanyort/scripts/refs/heads/main/docker_run/kafka-compose.yml -o kafka-compose.yml; docker compose -f kafka-compose.yml rm -fsv; docker compose -f kafka-compose.yml create; docker compose -f kafka-compose.yml start
@@ -30,6 +30,11 @@ Portainer
 ```
 docker volume create portainer_data
 docker run -d -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:latest
+```
+
+Multibucket na algar
+```
+30 4 * * * /usr/bin/docker pull ivanyort/multibucket-explorer:latest | grep -q "Downloaded newer image" && (/usr/bin/docker rm -f multibucket-explorer 2>/dev/null; /usr/bin/docker run -d --name multibucket-explorer -p 8086:8086 -v /etc/letsencrypt:/etc/letsencrypt:ro -e TLS_CERT_FILE=/etc/letsencrypt/live/algar.labsp.com/fullchain.pem -e TLS_KEY_FILE=/etc/letsencrypt/live/algar.labsp.com/privkey.pem ivanyort/multibucket-explorer:latest) >> /var/log/multibucket-update.log 2>&1
 ```
 
 Talend
